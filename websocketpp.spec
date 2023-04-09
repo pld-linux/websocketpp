@@ -5,20 +5,17 @@
 Summary:	C++ WebSocket Protocol Library
 Summary(pl.UTF-8):	Biblioteka C++ do obsługi protokołu WebSocket
 Name:		websocketpp
-Version:	0.8.1
+Version:	0.8.2
 Release:	1
 License:	BSD
 Group:		Development/Libraries
 #Source0Download: https://github.com/zaphoyd/websocketpp/releases
 Source0:	https://github.com/zaphoyd/websocketpp/archive/%{version}/%{name}-%{version}.tar.gz
-# Source0-md5:	75e96b15ba1cb3b37175d58352c3a7fb
+# Source0-md5:	261e977d69fdcb8fdaacb46b7c9e2258
 Source1:	websocketpp.pc
 Patch0:		%{name}-cmake_noarch.patch
 Patch1:		%{name}-cmake-configversion-compatibility.patch
 Patch2:		%{name}-tests.patch
-Patch3:		%{name}-fix_version.patch
-# from https://github.com/zaphoyd/websocketpp/pull/814/commits/c769c9238ad62178f506038178714a1c35aa2769.patch
-Patch4:		%{name}-boost.patch
 URL:		https://www.zaphoyd.com/websocketpp/
 BuildRequires:	boost-devel >= 1.39
 BuildRequires:	cmake >= 2.8.8
@@ -71,8 +68,6 @@ oparty o Boost Asio.
 %patch0 -p1
 %patch1 -p1
 %patch2 -p1
-%patch3 -p1
-%patch4 -p1
 
 %build
 install -d build
@@ -93,7 +88,7 @@ rm -rf $RPM_BUILD_ROOT
 	DESTDIR=$RPM_BUILD_ROOT
 
 install -d $RPM_BUILD_ROOT%{_npkgconfigdir}
-cp -p %{SOURCE1} $RPM_BUILD_ROOT%{_npkgconfigdir}/websocketpp.pc
+%{__sed} -e 's/@version@/%{version}/' %{SOURCE1} >$RPM_BUILD_ROOT%{_npkgconfigdir}/websocketpp.pc
 
 %clean
 rm -rf $RPM_BUILD_ROOT
