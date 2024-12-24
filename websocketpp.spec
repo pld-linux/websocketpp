@@ -6,7 +6,7 @@ Summary:	C++ WebSocket Protocol Library
 Summary(pl.UTF-8):	Biblioteka C++ do obsługi protokołu WebSocket
 Name:		websocketpp
 Version:	0.8.2
-Release:	1
+Release:	2
 License:	BSD
 Group:		Development/Libraries
 #Source0Download: https://github.com/zaphoyd/websocketpp/releases
@@ -16,6 +16,7 @@ Source1:	websocketpp.pc
 Patch0:		%{name}-cmake_noarch.patch
 Patch1:		%{name}-cmake-configversion-compatibility.patch
 Patch2:		%{name}-tests.patch
+Patch3:		boost-1.87.patch
 URL:		https://www.zaphoyd.com/websocketpp/
 BuildRequires:	boost-devel >= 1.39
 BuildRequires:	cmake >= 2.8.8
@@ -65,9 +66,10 @@ oparty o Boost Asio.
 
 %prep
 %setup -q
-%patch0 -p1
-%patch1 -p1
-%patch2 -p1
+%patch -P 0 -p1
+%patch -P 1 -p1
+%patch -P 2 -p1
+%patch -P 3 -p1
 
 %build
 install -d build
