@@ -1,0 +1,22 @@
+--- websocketpp-0.8.2/CMakeLists.txt.orig	2025-03-29 12:11:12.418632889 +0100
++++ websocketpp-0.8.2/CMakeLists.txt	2025-03-29 16:22:55.506812437 +0100
+@@ -215,7 +215,7 @@ if (BUILD_TESTS OR BUILD_EXAMPLES)
+     set (Boost_USE_MULTITHREADED TRUE)
+     set (Boost_ADDITIONAL_VERSIONS "1.39.0" "1.40.0" "1.41.0" "1.42.0" "1.43.0" "1.44.0" "1.46.1") # todo: someone who knows better spesify these!
+ 
+-    find_package (Boost 1.39.0 COMPONENTS "${WEBSOCKETPP_BOOST_LIBS}")
++    find_package (Boost 1.39.0 COMPONENTS ${WEBSOCKETPP_BOOST_LIBS})
+ 
+     if (Boost_FOUND)
+         # Boost is a project wide global dependency.
+--- websocketpp-0.8.2/cmake/CMakeHelpers.cmake.orig	2020-04-19 20:25:17.000000000 +0200
++++ websocketpp-0.8.2/cmake/CMakeHelpers.cmake	2025-03-29 16:39:51.317975982 +0100
+@@ -86,7 +86,7 @@ endmacro ()
+ 
+ macro (link_boost)
+     target_link_libraries (${TARGET_NAME} ${Boost_LIBRARIES})
+-    set_property(TARGET ${TARGET_NAME} APPEND PROPERTY INCLUDE_DIRECTORIES ${Boost_INCLUDE_DIR})
++    set_property(TARGET ${TARGET_NAME} APPEND PROPERTY INCLUDE_DIRECTORIES ${Boost_INCLUDE_DIRS})
+ endmacro ()
+ 
+ macro (link_openssl)
